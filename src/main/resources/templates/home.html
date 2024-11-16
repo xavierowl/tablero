@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Servicio</title>
+    <!-- Enlace a Bootstrap desde CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Bienvenido al Sistema de Contratación</h1>
+
+    <!-- Mensaje de éxito -->
+    <div th:if="${mensaje}" class="alert alert-success">
+        <h2 th:text="${mensaje}"></h2>
+    </div>
+
+    <!-- Listado de acciones -->
+    <h2 class="text-center mb-4">Acciones disponibles:</h2>
+
+    <div class="list-group">
+        <a href="personas" class="list-group-item list-group-item-action">
+            Listado de usuarios
+        </a>
+        <a href="personas/nuevo" class="list-group-item list-group-item-action">
+            Crear nuevo usuario
+        </a>
+        <a href="ordenes" class="list-group-item list-group-item-action">
+            Listado de órdenes
+        </a>
+        <a href="ordenes/nueva" class="list-group-item list-group-item-action">
+            Crear nueva orden
+        </a>
+        <a href="ordenes/asignar" class="list-group-item list-group-item-action">
+            Asignar orden
+        </a>
+    </div>
+</div>
+
+<!-- Enlace a JS de Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
