@@ -6,14 +6,43 @@
     <title>Sistema de Servicio</title>
     <!-- Enlace a Bootstrap desde CDN -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Header */
+        header {
+            background-color: gray; /* Color de fondo del header */
+            color: #ffffff !important;              /* Color del texto */
+            padding: 20px 0;           /* Espaciado superior e inferior */
+            width: 100%;               /* Ocupa todo el ancho */
+            text-align: center;        /* Centra el logo */
+            box-sizing: border-box;    /* Evita que el padding afecte al tamaño */
+            margin-bottom: 40px;       /* Separación del header y navbar */
+        }
+
+        .logo h1 {
+            margin: 0;
+            font-size: 2.5em;          /* Tamaño grande para el título */
+            letter-spacing: 3px;       /* Espaciado entre letras */
+            text-transform: uppercase; /* Pone todo el texto en mayúsculas */
+        }
+    </style>
 </head>
 <body class="bg-light">
+<!-- Header -->
+<header>
+    <div class="logo">
+        <h1>SISTEMA DE GESTION</h1>
+    </div>
+</header>
 <div class="container mt-5">
     <h1 class="text-center mb-4">Bienvenido al Sistema de Contratación</h1>
 
     <!-- Mensaje de éxito -->
     <div th:if="${mensaje}" class="alert alert-success">
         <h2 th:text="${mensaje}"></h2>
+    </div>
+
+    <div th:if="${error}" class="alert alert-danger">
+        <h2 th:text="${error}"></h2>
     </div>
 
     <!-- Listado de acciones -->
@@ -31,9 +60,6 @@
         </a>
         <a href="ordenes/nueva" class="list-group-item list-group-item-action">
             Crear nueva orden
-        </a>
-        <a href="ordenes/asignar" class="list-group-item list-group-item-action">
-            Asignar orden
         </a>
     </div>
 </div>

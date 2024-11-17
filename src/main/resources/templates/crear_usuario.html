@@ -6,8 +6,34 @@
     <title>Crear Nuevo Usuario</title>
     <!-- Enlace a Bootstrap desde CDN -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Header */
+        header {
+            background-color: gray; /* Color de fondo del header */
+            color: #ffffff !important;              /* Color del texto */
+            padding: 20px 0;           /* Espaciado superior e inferior */
+            width: 100%;               /* Ocupa todo el ancho */
+            text-align: center;        /* Centra el logo */
+            box-sizing: border-box;    /* Evita que el padding afecte al tamaño */
+            margin-bottom: 40px;       /* Separación del header y navbar */
+        }
+
+        .logo h1 {
+            margin: 0;
+            font-size: 2.5em;          /* Tamaño grande para el título */
+            letter-spacing: 3px;       /* Espaciado entre letras */
+            text-transform: uppercase; /* Pone todo el texto en mayúsculas */
+        }
+    </style>
 </head>
+
 <body class="bg-light">
+<!-- Header -->
+<header>
+    <div class="logo">
+        <h1>SISTEMA DE GESTION</h1>
+    </div>
+</header>
 <div class="container mt-5">
     <h1 class="text-center mb-4">Crear Nuevo Usuario</h1>
     <form th:action="@{/crearPersona}" th:object="${persona}" method="post" class="bg-white p-4 rounded shadow-sm">
@@ -21,7 +47,10 @@
         </div>
         <div class="form-group">
             <label for="tipo">Tipo</label>
-            <input type="text" id="tipo" name="tipo" th:field="*{tipo}" class="form-control" placeholder="Ingrese el tipo" required>
+            <select id="tipo" name="tipo" th:field="*{tipo}" class="form-control" required>
+                <option value="1">Cliente</option>
+                <option value="2">Empleado</option>
+            </select>
         </div>
         <button type="submit" class="btn btn-primary btn-block">Crear Usuario</button>
     </form>

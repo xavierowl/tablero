@@ -26,7 +26,9 @@ public class Orden {
     private float precio;
     private LocalDate fechaRegistro;
     private LocalDate fechaFin;
-    private int prioridad; // (1: Baja,2: Normal, 3: Alta, 4: Urgente)
+    private int prioridad; // (0: Baja,1: Normal, 2: Alta, 3: Urgente)
+    @Lob
+    private byte[] data;
 
     public Long getId() {
         return id;
@@ -98,5 +100,13 @@ public class Orden {
 
     public void setPrioridad(int prioridad) {
         this.prioridad = prioridad;
+    }
+
+    public byte[] getData() {
+        return data;
+    }
+
+    public void setData(byte[] data) {
+        this.data = data;
     }
 }

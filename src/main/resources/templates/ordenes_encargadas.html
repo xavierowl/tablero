@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordenes Registradas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex; /* Permite usar flexbox */
+            justify-content: center; /* Centra horizontalmente */
+            align-items: flex-start; /* Centra verticalmente */
+            height: 100vh; /* Asegura que el body ocupe toda la altura de la pantalla */
+            flex-direction: column;
+        }
+        /* Header */
+        header {
+            background-color: gray; /* Color de fondo del header */
+            color: #ffffff !important;              /* Color del texto */
+            padding: 20px 0;           /* Espaciado superior e inferior */
+            width: 100%;               /* Ocupa todo el ancho */
+            text-align: center;        /* Centra el logo */
+            box-sizing: border-box;    /* Evita que el padding afecte al tamaño */
+            margin-bottom: 40px;       /* Separación del header y navbar */
+        }
+
+        .logo h1 {
+            margin: 0;
+            font-size: 2.5em;          /* Tamaño grande para el título */
+            letter-spacing: 3px;       /* Espaciado entre letras */
+            text-transform: uppercase; /* Pone todo el texto en mayúsculas */
+        }
+
+        /* Botón de "Avanzar" con color adicional */
+        .btn-estado-anterior {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #ff6f61; /* Verde para "Estado Anterior" */
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            border-radius: 25px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+        }
+
+        .btn-estado-anterior:hover {
+            background-color: #45a049; /* Color más oscuro al pasar el mouse */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-estado-anterior:active {
+            background-color: #388e3c;
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Botón con color azul para "Avanzar" */
+        .btn-avanzar {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff; /* Azul para el botón "Avanzar" */
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            border-radius: 25px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+        }
+
+        .btn-avanzar:hover {
+            background-color: #0056b3; /* Color más oscuro al pasar el mouse */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-avanzar:active {
+            background-color: #004085;
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 80%;
+            max-width: 1200px;
+            margin-top: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .status-columns {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .status-column {
+            width: 30%;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+            flex: 1;
+        }
+        .status-column h2 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        .order-item {
+            background-color: #fff;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .order-item p {
+            margin: 5px 0;
+        }
+        .no-data {
+            text-align: center;
+            color: #777;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .status-column .no-data {
+            color: #f44336;
+        }
+        .order-item p strong {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<header>
+    <div class="logo">
+        <h1>SISTEMA DE GESTION</h1>
+    </div>
+</header>
+
+<div class="container" style="width: 100%">
+    <h1 th:text="'Estas son las ordenes encargadas para: ' + ${persona.nombre + ' ' + persona.apellido}"></h1>
+    <h5><a href="personas">Regresar</a></h5>
+    <!-- Mensaje de éxito -->
+    <div th:if="${mensaje}" class="alert alert-success">
+        <h2 th:text="${mensaje}"></h2>
+    </div>
+    <div class="status-columns">
+        <!-- Pendientes -->
+        <div class="status-column">
+            <h2>Pendientes</h2>
+            <div th:each="orden : ${ordenes}" th:if="${orden.estado == 0}" class="order-item">
+                <p><strong>ID:</strong> <span th:text="${orden.id}"></span></p>
+                <p><strong>Descripción:</strong> <span th:text="${orden.descripcion}"></span></p>
+                <p><strong>Cliente:</strong> <span th:text="${orden.cliente != null ? orden.cliente.nombre + ' ' + orden.cliente.apellido : 'No asignado'}"></span></p>
+                <p><strong>Encargado:</strong> <span th:text="${orden.encargado != null ? orden.encargado.nombre + ' ' + orden.encargado.apellido : 'No asignado'}"></span></p>
+                <p><strong>Fecha Registro:</strong> <span th:text="${orden.fechaRegistro}"></span></p>
+                <p><strong>Prioridad:</strong> <span th:text="${orden.prioridad == 0 ? 'Baja' : (orden.prioridad == 1 ? 'Normal' : (orden.prioridad == 2 ? 'Alta' : 'Urgente'))}"></span></p>
+                <p><strong>Adjunto:</strong> <span th:text="${orden.fechaRegistro}"></span></p>
+                <a th:if="${orden.data != null}">
+                    <a th:href="@{/descargarAdjunto/{id}(id=${orden.id})}" download>Adjunto Disponible</a>
+                </a>
+                <br>
+                <a th:href="@{/cambiarEstado(id=${orden.id}, estado=1)}" class="btn btn-avanzar">
+                    Avanzar
+                </a>
+            </div>
+            <div th:if="${#lists.isEmpty(ordenes)}" class="no-data">No hay órdenes pendientes.</div>
+        </div>
+
+        <!-- En Proceso -->
+        <div class="status-column">
+            <h2>En Proceso</h2>
+            <div th:each="orden : ${ordenes}" th:if="${orden.estado == 1}" class="order-item">
+                <p><strong>ID:</strong> <span th:text="${orden.id}"></span></p>
+                <p><strong>Descripción:</strong> <span th:text="${orden.descripcion}"></span></p>
+                <p><strong>Cliente:</strong> <span th:text="${orden.cliente != null ? orden.cliente.nombre + ' ' + orden.cliente.apellido : 'No asignado'}"></span></p>
+                <p><strong>Encargado:</strong> <span th:text="${orden.encargado != null ? orden.encargado.nombre + ' ' + orden.encargado.apellido : 'No asignado'}"></span></p>
+                <p><strong>Fecha Registro:</strong> <span th:text="${orden.fechaRegistro}"></span></p>
+                <p><strong>Prioridad:</strong> <span th:text="${orden.prioridad == 0 ? 'Baja' : (orden.prioridad == 1 ? 'Normal' : (orden.prioridad == 2 ? 'Alta' : 'Urgente'))}"></span></p>
+                <a th:if="${orden.data != null}">
+                    <a th:href="@{/descargarAdjunto/{id}(id=${orden.id})}" download>Adjunto Disponible</a>
+                </a>
+                <br>
+                <a th:href="@{/cambiarEstado(id=${orden.id}, estado=0)}" class="btn btn-estado-anterior">
+                    Regresar
+                </a>
+                <a th:href="@{/cambiarEstado(id=${orden.id}, estado=2)}" class="btn btn-avanzar">
+                    Avanzar
+                </a>
+            </div>
+            <div th:if="${#lists.isEmpty(ordenes)}" class="no-data">No hay órdenes en proceso.</div>
+        </div>
+
+        <!-- Finalizadas -->
+        <div class="status-column">
+            <h2>Finalizadas</h2>
+            <div th:each="orden : ${ordenes}" th:if="${orden.estado == 2}" class="order-item">
+                <p><strong>ID:</strong> <span th:text="${orden.id}"></span></p>
+                <p><strong>Descripción:</strong> <span th:text="${orden.descripcion}"></span></p>
+                <p><strong>Cliente:</strong> <span th:text="${orden.cliente != null ? orden.cliente.nombre + ' ' + orden.cliente.apellido : 'No asignado'}"></span></p>
+                <p><strong>Encargado:</strong> <span th:text="${orden.encargado != null ? orden.encargado.nombre + ' ' + orden.encargado.apellido : 'No asignado'}"></span></p>
+                <p><strong>Fecha Registro:</strong> <span th:text="${orden.fechaRegistro}"></span></p>
+                <p><strong>Prioridad:</strong> <span th:text="${orden.prioridad == 0 ? 'Baja' : (orden.prioridad == 1 ? 'Normal' : (orden.prioridad == 2 ? 'Alta' : 'Urgente'))}"></span></p>
+                <a th:if="${orden.data != null}">
+                    <a th:href="@{/descargarAdjunto/{id}(id=${orden.id})}" download>Adjunto Disponible</a>
+                </a>
+                <br>
+                <br>
+                <a th:href="@{/cambiarEstado(id=${orden.id}, estado=1)}" class="btn btn-estado-anterior">
+                    Regresar
+                </a>
+            </div>
+            <div th:if="${#lists.isEmpty(ordenes)}" class="no-data">No hay órdenes finalizadas.</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

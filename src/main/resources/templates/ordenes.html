@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usuarios Registrados</title>
+    <title>Ordenes Registradas</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -75,36 +75,43 @@
 </head>
 <body>
 
-<div class="container" style="width: 100%">
-    <h1>Listado de Usuarios</h1>
+<div class="container">
+    <h1>Listado General de Ordenes</h1>
     <h5><a href="home">Regresar</a></h5>
     <table>
         <thead>
         <tr>
             <th>Id</th>
-            <th>Nombres</th>
-            <th>Apellidos</th>
-            <th>Tipo</th>
-            <th>Acción</th>
+            <th>Description</th>
+            <th>Cliente</th>
+            <th>Encargado</th>
+            <th>Estado</th>
+            <th>Fecha de Registro</th>
+            <th>Fecha de Fin</th>
+            <th>Prioridad</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="persona : ${personas}">
-            <td th:text="${persona.id}">123</td>
-            <td th:text="${persona.nombre}">Juan</td>
-            <td th:text="${persona.apellido}">Pérez</td>
-            <td th:if="${persona.tipo == 1}">Cliente</td>
-            <td th:if="${persona.tipo == 2}">Empleado</td>
-            <td th:if="${persona.tipo == 1}">
-                <a th:href="@{/ordenesCliente(id=${persona.id})}" class="btn btn-primary btn-block">Ver Pedidos</a>
-            </td>
-            <td th:if="${persona.tipo == 2}">
-                <a th:href="@{/ordenesEmpleado(id=${persona.id})}" class="btn btn-primary btn-block">Ver Encargos</a>
-            </td>
+        <tr th:each="orden : ${ordenes}">
+            <td th:text="${orden.id}">123</td>
+            <td th:text="${orden.descripcion}">Juan</td>
+            <td th:if="${orden.cliente != null}" th:text="${orden.cliente.nombre+' '+orden.cliente.apellido}"></td>
+            <td th:if="${orden.cliente == null}">No asignado</td>
+            <td th:if="${orden.encargado != null}" th:text="${orden.encargado.nombre+' '+orden.encargado.apellido}"></td>
+            <td th:if="${orden.estado == 0}">Pendiente</td>
+            <td th:if="${orden.estado  == 1}">En Proceso</td>
+            <td th:if="${orden.estado == 2}">Finalizado</td>
+            <td th:text="${orden.fechaRegistro}"></td>
+            <td th:text="${orden.fechaFin}"></td>
+            <td th:if="${orden.precio == null}"></td>
+            <td th:if="${orden.prioridad == 0}">Baja</td>
+            <td th:if="${orden.prioridad == 1}">Normal</td>
+            <td th:if="${orden.prioridad == 2}">Alta</td>
+            <td th:if="${orden.prioridad == 4}">Urgente</td>
         </tr>
         <!-- Si no hay datos, muestra un mensaje -->
-        <tr th:if="${#lists.isEmpty(personas)}">
-            <td colspan="4" class="no-data">No hay personas disponibles.</td>
+        <tr th:if="${#lists.isEmpty(ordenes)}">
+            <td colspan="4" class="no-data">No hay ordenes disponibles.</td>
         </tr>
         </tbody>
     </table>

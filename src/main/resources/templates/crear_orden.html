@@ -6,18 +6,40 @@
     <title>Crear Nuevo Orden</title>
     <!-- Enlace a Bootstrap desde CDN -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Header */
+        header {
+            background-color: gray; /* Color de fondo del header */
+            color: #ffffff !important;              /* Color del texto */
+            padding: 20px 0;           /* Espaciado superior e inferior */
+            width: 100%;               /* Ocupa todo el ancho */
+            text-align: center;        /* Centra el logo */
+            box-sizing: border-box;    /* Evita que el padding afecte al tamaño */
+            margin-bottom: 40px;       /* Separación del header y navbar */
+        }
+
+        .logo h1 {
+            margin: 0;
+            font-size: 2.5em;          /* Tamaño grande para el título */
+            letter-spacing: 3px;       /* Espaciado entre letras */
+            text-transform: uppercase; /* Pone todo el texto en mayúsculas */
+        }
+    </style>
 </head>
+
 <body class="bg-light">
+<!-- Header -->
+<header>
+    <div class="logo">
+        <h1>SISTEMA DE GESTION</h1>
+    </div>
+</header>
 <div class="container mt-5">
     <h1 class="text-center mb-4">Crear Nueva Orden</h1>
-    <form th:action="@{/crearOrden}" th:object="${orden}" method="post" class="bg-white p-4 rounded shadow-sm">
+    <form th:action="@{/crearOrden}" th:object="${orden}" method="post" class="bg-white p-4 rounded shadow-sm" enctype="multipart/form-data">
         <div class="form-group">
             <label for="descripcion">Descripción</label>
             <input type="text" id="descripcion" name="descripcion" th:field="*{descripcion}" class="form-control" placeholder="Ingrese la descripción" required>
-        </div>
-        <div class="form-group">
-            <label for="estado">Estado</label>
-            <input type="text" id="estado" name="estado" th:field="*{estado}" class="form-control" placeholder="Ingrese el estado" required>
         </div>
         <div class="form-group">
             <label for="fechaFin">Fecha de Finalización</label>
@@ -28,6 +50,47 @@
             <label for="precio">Precio</label>
             <input type="text" id="precio" name="precio" th:field="*{precio}" class="form-control" placeholder="Ingrese el valor" required>
         </div>
+
+        <div class="form-group">
+            <label for="prioridad">Tipo</label>
+            <select id="prioridad" name="prioridad" th:field="*{prioridad}" class="form-control" required>
+                <option value="0">Baja</option>
+                <option value="1">Normal</option>
+                <option value="2">Alta</option>
+                <option value="3">Urgente</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="cliente">Seleccione el cliente</label>
+            <select id="cliente" name="cliente" th:field="*{cliente}" class="form-control">
+                <option value="" disabled selected>Seleccione un cliente</option>
+                <!-- Iterar sobre la lista de clientes para mostrarlas como opciones -->
+                <option th:each="cliente : ${clientes}"
+                        th:value="${cliente.id}"
+                        th:text="${cliente.nombre + ' ' + cliente.apellido}"></option>
+            </select>
+        </div>
+
+        <div>
+            <label for="empleado">Seleccione el Encargado</label>
+            <select id="empleado" name="empleado" th:field="*{encargado}" class="form-control">
+                <option value="" disabled selected>Seleccione un encargado</option>
+                <!-- Iterar sobre la lista de empleados para mostrarlas como opciones -->
+                <option th:each="empleado : ${empleados}"
+                        th:value="${empleado.id}"
+                        th:text="${empleado.nombre + ' ' + empleado.apellido}"></option>
+            </select>
+        </div>
+
+        <br>
+
+        <div>
+            <label for="archivo">Seleccionar archivo:</label>
+            <input type="file" name="archivo" id="archivo" required>
+        </div>
+
+        <br>
 
         <button type="submit" class="btn btn-primary btn-block">Crear Orden</button>
     </form>
