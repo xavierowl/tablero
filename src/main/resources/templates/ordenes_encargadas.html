@@ -154,11 +154,10 @@
 </header>
 
 <div class="container" style="width: 100%">
-    <h1 th:text="'Estas son las ordenes encargadas para: ' + ${persona.nombre + ' ' + persona.apellido}"></h1>
-    <h5><a href="personas">Regresar</a></h5>
+
     <!-- Mensaje de éxito -->
     <div th:if="${mensaje}" class="alert alert-success">
-        <h2 th:text="${mensaje}"></h2>
+        <h2 th:text="${mensaje}" style="color: black !important"></h2>
     </div>
     <div class="status-columns">
         <!-- Pendientes -->

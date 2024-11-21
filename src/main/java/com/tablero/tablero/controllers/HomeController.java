@@ -10,4 +10,9 @@ public class HomeController {
     public String getHome(){
         return "home";
     }
+
+    @RequestMapping("/")
+    public String getRoot(){
+        return "home";
+    }
 }
