@@ -618,10 +618,10 @@
                             <td th:if="${persona.tipo == 1}">Cliente</td>
                             <td th:if="${persona.tipo == 2}">Empleado</td>
                             <td th:if="${persona.tipo == 1}">
-                                <a th:href="@{/ordenesCliente(id=${persona.id})}" class="btn btn-primary btn-block">Ver Pedidos</a>
+                                <a th:href="@{/private/ordenesCliente(id=${persona.id})}" class="btn btn-primary btn-block">Ver Pedidos</a>
                             </td>
                             <td th:if="${persona.tipo == 2}">
-                                <a th:href="@{/ordenesEmpleado(id=${persona.id})}" class="btn btn-primary btn-block">Ver Encargos</a>
+                                <a th:href="@{/private/ordenesEmpleado(id=${persona.id})}" class="btn btn-primary btn-block">Ver Encargos</a>
                             </td>
                         </tr>
                         <!-- Si no hay datos, muestra un mensaje -->

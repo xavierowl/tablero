@@ -596,9 +596,9 @@
         <div class="content">
             <div class="panel-header bg-primary-gradient">
                 <div class="page-inner py-5">
-                    <h1 class="text-center mb-4" style="color: white">Crear Nuevo Usuario</h1>
+                    <h1 class="text-center mb-4" style="color: white">Crear Nueva Persona</h1>
                     <h5 style="color: white"><a href="../home" style="color: white;">Regresar</a></h5>
-                    <form th:action="@{/crearPersona}" th:object="${persona}" method="post" class="bg-white p-4 rounded shadow-sm">
+                    <form th:action="@{/private/crearPersona}" th:object="${persona}" method="post" class="bg-white p-4 rounded shadow-sm">
                         <div class="form-group">
                             <label for="nombre">Nombre</label>
                             <input type="text" id="nombre" name="nombre" th:field="*{nombre}" class="form-control" placeholder="Ingrese el nombre" required>
@@ -606,6 +606,14 @@
                         <div class="form-group">
                             <label for="apellido">Apellido</label>
                             <input type="text" id="apellido" name="apellido" th:field="*{apellido}" class="form-control" placeholder="Ingrese el apellido" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="userName">Nombre de Usuario</label>
+                            <input type="text" id="userName" name="userName" class="form-control" placeholder="Ingrese el nombre de usuario" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="clave">Inrese la contraseña</label>
+                            <input type="password" id="clave" name="clave" class="form-control" placeholder="Ingrese la contraseña" required>
                         </div>
                         <div class="form-group">
                             <label for="tipo">Tipo</label>

@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +31,19 @@ public class OrdenController {
     public OrdenController(OrdenService ordenService, PersonaService personaService) {
         this.ordenService = ordenService;
         this.personaService = personaService;
+    }
+
+    @RequestMapping("/home")
+    public String getHome(Model modelo){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String tipo = authentication.getAuthorities().toArray()[0].toString();
+        modelo.addAttribute("tipo", tipo);
+        return "home";
+    }
+
+    @RequestMapping("/")
+    public String getRoot(){
+        return "home";
     }
 
     @RequestMapping("/ordenesCliente")

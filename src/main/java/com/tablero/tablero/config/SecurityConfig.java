@@ -21,11 +21,13 @@ public class SecurityConfig {
     public SecurityFilterChain secutiryFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/login").permitAll()
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/public/**").permitAll()
                                                    .requestMatchers("/assets/**").permitAll()
+                                                   .requestMatchers("/crearPersona").authenticated()
                                                    .requestMatchers("/private/**").authenticated()
                 )
                 .formLogin(form -> form
+                        //.loginPage("/public/login_personalizado")
                         .defaultSuccessUrl("/private/home", true)
                         .permitAll())
                 .build();
