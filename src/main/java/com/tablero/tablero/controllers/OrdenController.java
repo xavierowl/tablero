@@ -20,6 +20,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Controller
+@RequestMapping("/private")
 public class OrdenController {
 
     private final OrdenService ordenService;

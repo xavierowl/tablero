@@ -51,6 +51,20 @@
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 
+		<!-- Dependencia de spring security -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.24</version> <!-- Asegúrate de usar la versión correcta -->
+			<scope>provided</scope>
+		</dependency>
+
 		<!-- Dependencia para el conector JDBC de MySQL -->
 		<dependency>
 			<groupId>mysql</groupId>
